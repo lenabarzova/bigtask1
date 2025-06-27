@@ -1,14 +1,19 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Wall -Wextra -O2 -std=c11
 LIBS = -lm
+SRC = main.c lodepng.c
+OBJ = $(SRC:.c=.o)
+TARGET = segment
 
-all: main run
+all: $(TARGET)
 
-main: main.c lodepng.c
-	$(CC) $(CFLAGS) -o main main.c lodepng.c $(LIBS)
+$(TARGET): $(OBJ)
+  $(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-run: main
-	./main
-	
+%.o: %.c
+  $(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f main
+  rm -f $(OBJ) $(TARGET) *.png
+
+.PHONY: all clean
