@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -O2
-SRC = main.c lodepng.c
+SRC = main (20).c lodepng.c
 OBJ = $(SRC:.c=.o)
 TARGET = segment
 
