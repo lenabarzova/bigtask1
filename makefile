@@ -1,18 +1,14 @@
 CC = gcc
-CFLAGS = -Wall -O2
-SRC = main (20).c lodepng.c
-OBJ = $(SRC:.c=.o)
-TARGET = segment
+CFLAGS = -Wall -Wextra -std=c11
+LIBS = -lm
 
-all: $(TARGET)
+all: main run
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+main: main.c lodepng.c
+	$(CC) $(CFLAGS) -o main main.c lodepng.c $(LIBS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
+run: main
+	./main
+	
 clean:
-	rm -f $(OBJ) $(TARGET)
-
-.PHONY: all clean
+	rm -f main
